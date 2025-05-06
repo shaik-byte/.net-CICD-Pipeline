@@ -26,8 +26,8 @@ jobs:
       run: dotnet build CalculatorTests.csproj --no-restore
 
     - name: Test with coverage
-      run: dotnet test CalculatorTests.csproj --no-build --collect:"XPlat Code Coverage"
-
+      run: dotnet test CalculatorTests.csproj --no-build
+      
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
       with:
