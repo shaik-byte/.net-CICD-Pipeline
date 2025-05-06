@@ -1,5 +1,8 @@
-public class Calculator
+namespace CalculatorLib
 {
-    public int Add(int a, int b) => a + b;
-    public int Subtract(int a, int b) => a - b;
+    public class Calculator
+    {
+        public int Add(int a, int b) => a + b;
+        public int Subtract(int a, int b) => a - b;
+    }
 }
