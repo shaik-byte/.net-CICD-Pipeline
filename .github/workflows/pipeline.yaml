@@ -20,7 +20,7 @@ jobs:
         dotnet-version: '6.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore MyDotNetApp/MyDotNetApp.csproj
+      run: dotnet restore MyDotNetApp.csproj
 
     - name: Build
       run: dotnet build MyDotNetApp.csproj --no-restore --configuration Release
