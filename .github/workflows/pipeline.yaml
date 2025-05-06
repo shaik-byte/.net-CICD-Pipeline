@@ -8,7 +8,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
@@ -26,10 +25,15 @@ jobs:
       run: dotnet build CalculatorTests.csproj --no-restore
 
     - name: Test with coverage
-      run: dotnet test CalculatorTests.csproj --no-build
-      
+      run: |
+        dotnet test CalculatorTests.csproj \
+          --no-build \
+          --collect:"XPlat Code Coverage" \
+          -p:CoverletOutputFormat=cobertura \
+          -p:CoverletOutput=TestResults/coverage/
+
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
       with:
         name: coverage-report
-        path: TestResults
+        path: TestResults/coverage/coverage.cobertura.xml
