@@ -1,8 +1,11 @@
-namespace CalculatorLib
-{
-    public class Calculator
-    {
-        public int Add(int a, int b) => a + b;
-        public int Subtract(int a, int b) => a - b;
-    }
-}
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="lib/Calculator.cs" />
+  </ItemGroup>
+
+</Project>
