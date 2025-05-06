@@ -1,42 +1,35 @@
-name: .NET 6 CI
+name: .NET Test and Coverage
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ main ]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '6.0.x'
+        dotnet-version: '7.0.x'
 
     - name: Restore dependencies
-      run: dotnet restore MyDotNetApp.Tests.csproj
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build MyDotNetApp.Tests.csproj --no-restore --configuration Release
+      run: dotnet build --no-restore
 
-    - name: Test with code coverage
-      run: dotnet test MyDotNetApp.Tests.csproj --no-build --collect:"XPlat Code Coverage"
-
-    - name: Install Report Generator
-      run: dotnet tool install --global dotnet-reportgenerator-globaltool
-
-    - name: Generate coverage report
-      run: |
-        reportgenerator -reports:**/coverage.cobertura.xml -targetdir:coveragereport -reporttypes:HtmlInline_AzurePipelines;lcov
+    - name: Test with coverage
+      run: dotnet test --no-build --collect:"XPlat Code Coverage"
 
     - name: Upload coverage report
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v3
       with:
         name: coverage-report
-        path: coveragereport
+        path: TestResults
