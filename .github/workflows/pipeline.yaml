@@ -18,11 +18,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Restore all projects
-      run: dotnet restore
+    - name: Restore solution
+      run: dotnet restore DotnetHiApp.sln
 
-    - name: Build all projects
-      run: dotnet build --no-restore
+    - name: Build solution
+      run: dotnet build DotnetHiApp.sln --no-restore
 
     - name: Run Tests
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test DotnetHiApp.sln --no-build --verbosity normal
