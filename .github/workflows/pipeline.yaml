@@ -1,4 +1,4 @@
-name: .NET Test and Coverage
+name: .NET Build
 
 on:
   push:
@@ -16,24 +16,13 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '7.0.x'
+        dotnet-version: 6.0.x
 
     - name: Restore dependencies
-      run: dotnet restore CalculatorTests.csproj
+      run: dotnet restore
 
     - name: Build
-      run: dotnet build CalculatorTests.csproj --no-restore
+      run: dotnet build --no-restore
 
-    - name: Test with coverage
-      run: |
-        dotnet test CalculatorTests.csproj \
-          --no-build \
-          --collect:"XPlat Code Coverage" \
-          -p:CoverletOutputFormat=cobertura \
-          -p:CoverletOutput=TestResults/coverage/
-
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v4
-      with:
-        name: coverage-report
-        path: TestResults/coverage/coverage.cobertura.xml
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
