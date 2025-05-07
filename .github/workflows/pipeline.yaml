@@ -1,4 +1,4 @@
-name: .NET Build
+name: .NET Build and Test
 
 on:
   push:
@@ -18,11 +18,11 @@ jobs:
       with:
         dotnet-version: 6.0.x
 
-    - name: Restore dependencies
+    - name: Restore all projects
       run: dotnet restore
 
-    - name: Build
+    - name: Build all projects
       run: dotnet build --no-restore
 
-    - name: Test
+    - name: Run Tests
       run: dotnet test --no-build --verbosity normal
